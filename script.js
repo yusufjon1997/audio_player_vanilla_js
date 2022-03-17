@@ -2,11 +2,12 @@ const music = document.querySelector('audio');
 const image = document.querySelector('img');
 const title = document.querySelector('#title');
 const artist = document.querySelector('#artist');
-
+// buttons
 const prevBtn =  document.querySelector('#prev');
 const playBtn =  document.querySelector('#play');
 const nextBtn =  document.querySelector('#next');
-
+const loopBtn  = document.querySelector("#loop");
+// progress 
 const progressContainer = document.querySelector('#progress-container');
 const progress = document.querySelector('#progress');
 const currentTimeEl = document.querySelector('#current-time');
@@ -78,11 +79,23 @@ function prevSong() {
     playSong()
 }
 
-nextBtn.addEventListener('click', nextSong)
-prevBtn.addEventListener('click', prevSong)
+let isLooping = false;
 
+/// looping functiions 
 
-playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()));
+function startLooping(){
+    isLooping = true;
+    music.loop = true;
+    loopBtn.classList.add('active');
+    console.log('loop true')
+}
+
+function stopLooping(){
+    isLooping = false;
+    music.loop = false;
+    loopBtn.classList.remove('active');
+    console.log('loop false')
+}
 
 
 // Update Dom 
@@ -129,16 +142,47 @@ function updateProgressBar(e){
 }
 
 /// set progress bar 
-
 function setProgressBar(e){
     // const { clientWidth } = e.srcElement;
     const clientWidth = this.clientWidth;
     const clickX = e.offsetX;
     const { duration } = music;
     music.currentTime = (clickX / clientWidth) * duration;
-    music.loop = true;
 } 
-music.addEventListener('timeupdate', updateProgressBar )
-// music.addEventListener('ended', nextSong);
+
+/// Event listeners 
+nextBtn.addEventListener('click', nextSong)
+prevBtn.addEventListener('click', prevSong)
+playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()));
+loopBtn.addEventListener('click', () => (isLooping ? stopLooping() : startLooping()));
+music.addEventListener('timeupdate', updateProgressBar);
+music.addEventListener('ended', nextSong);
+
 progressContainer.addEventListener('click', setProgressBar);
+
+
+
+const volume = document.querySelector('#volume-input');
+const volume_progress = document.querySelector('.volume-progress');
+const volume_icon = document.querySelector('.fa-volume-down');
+const volume_off_icon = document.querySelector('.fa-volume-off');
+
+
+volume.oninput = function(){
+
+    let vol = volume.value / 100;
+    music.volume = vol;
+
+    volume_progress.style.width = `${volume.value}%`;
+    
+    // change volume icon if volume is 0 
+    if(vol == 0) {
+        volume_icon.classList.replace('on', 'off');
+        volume_off_icon.classList.replace('off', 'on');
+    } else {
+        volume_icon.classList.replace('off', 'on');
+        volume_off_icon.classList.replace('on', 'off');
+    }
+}
+
 

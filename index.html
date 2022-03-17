@@ -23,7 +23,10 @@
     
         <!-- Progress -->
         <div class="progress-container" id="progress-container">
-            <div class="progress" id="progress"></div>
+            <div class="progress-track">
+                <div class="progress" id="progress"></div>
+                <div class="progress-pointer"></div>
+            </div>
             <div class="duration-wrapper">
                 <span id="current-time">0:00</span>
                 <span id="duration">2:06</span>
@@ -31,14 +34,23 @@
         </div>
           <!-- Controls  -->
         <div class="player-controls">
-            <i class="fas fa-volume-down"></i>
+            <div class="volume-icons">
+                <i class="fas fa-volume-down volume on"></i>
+                <i class="fas fa-volume-off volume off"></i>
+                <span class="volume-change">
+                    <input id="volume-input" type="range" max="100" min="0" value="0">
+                    <div class="volume-progress"></div>
+                </span>
+            </div>
             
             <div class="primary-controls">
                 <i class="fas fa-backward" id="prev" title="Previos"></i>
                 <i class="fas fa-play main-button" id="play" title="Play"></i>
                 <i class="fas fa-forward" id="next" title="Next"></i>
             </div>
-        <i class="material-icons" style="color:rgb(129, 129, 129); font-size:32px;cursor: pointer;">repeat_one</i>
+            <span class="repeat-one" id="loop">
+                <i class="material-icons">repeat_one</i>
+            </span>
         
         </div>
 

@@ -55,15 +55,26 @@ h3 {
 
 /* Progress */
 .progress-container {
-  background: #fff;
+  /* background: #fff;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer; */
   margin: 30px 20px;
   height: 4px;
   width: 90%;
+  position: relative;
 }
 
-.progress {
+.progress-track {
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 4px;
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.progress-track .progress {
   background: #242323;
   border-radius: 5px;
   height: 100%;
@@ -72,17 +83,21 @@ h3 {
   transition: width 0.1s linear;
 }
 
-.progress::after{
-  content: "";
+.progress-pointer {
+  /* display: none; */
   width: 10px;
   height: 10px;
-  background-color: #242323;
+  border-radius: 50%;
+  background-color: black;
+  padding: 4px;
+  margin-top: -7px;
+  margin-left: -2px;
 }
 
 
 .duration-wrapper {
   position: relative;
-  top: -25px;
+  top: -30px;
   display: flex;
   justify-content: space-between;
 }
@@ -97,10 +112,13 @@ h3 {
   align-items: center;
 }
 
-.fas {
+.primary-controls {
+  position: relative;
+}
+
+.primary-controls .fas {
   font-size: 30px;
   color: rgb(129, 129, 129);
-  margin-right: 30px;
   cursor: pointer;
   user-select: none;
 }
@@ -120,7 +138,93 @@ h3 {
 .main-button {
   font-size: 40px;
   position: relative;
+  padding: 0 .5em;
+}
+
+
+.repeat-one i {
+  color:rgb(129,129,129); 
+  font-size:32px;
+  cursor: pointer;
+}
+
+.repeat-one i:hover {
+  color: #5b5c5c;
+  text-shadow: 0px 0px 10px #5b5c5c;
+}
+
+.active {
+  color: #5b5c5c;
+  text-shadow: 0px 0px 10px #5b5c5c;
+}
+
+.volume-icons {
+  position: relative;
+  align-items: center;
+  display: flex;
+}
+
+.volume {
+  font-size: 30px;
+  color: rgb(129, 129, 129);
+  cursor: pointer;
+  user-select: none;
+}
+
+
+.volume-change {
+  position: relative;
+  display: none; 
+}
+
+.volume-change input {
+  -webkit-appearance: none;
+  width: 100%;
+  outline: none;
+  height: 8px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgb(129, 129, 129);
+  cursor: pointer;
+}
+
+.volume-change input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 17px;
+  height: 17px;
+  border-radius: 20px;
+  background-color: #242323;
+  cursor: pointer;
+  z-index: 100;
+}
+
+
+
+.volume-change .volume-progress {
+  position: absolute;
   top: 3px;
+  left: 3px;
+  width: 50%;
+  max-width: 120px;
+  height: 8px;
+  border-radius: 5px;
+  background-color: #242323;
+  cursor: pointer;
+  z-index: 1;
+}
+
+
+.on {
+  display: block;
+}
+.off {
+  display: none;
+}
+
+.volume-icons:hover > .volume-change {
+  display: flex;
+  transition: 1s ease-in-out;
+  position: relative;
 }
 
 /* Media Query: iPhone (Vertical) */
